@@ -1,0 +1,346 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: #222;
+}
+:root{
+    --bcm-accent: #d90000;
+}
+::-webkit-scrollbar {
+    background-color: transparent;
+    width: 7px;
+}
+::-webkit-scrollbar-thumb{
+    background-color:#ddd;
+    border-radius: 4px;
+}
+*{
+    box-sizing: border-box;
+}
+a{
+    transition: 0.2s ease-out;
+    cursor: pointer;
+    text-align: center;
+}
+.container{
+    display: flex;
+    margin: 0 auto;
+    width: 1200px;
+    align-items: stretch;
+}
+@media screen and (max-width: 1250px){
+    .container{
+        width: 1000px;
+    }
+}
+
+@media screen and (max-width: 1024px){
+    .container{
+        width: 950px;
+    }
+}
+
+@media screen and (max-width: 992px){
+    .container{
+        width: calc(100% - 30px);
+    }
+}
+.hide{
+    display: none;
+}
+.fullscreen{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw!important;
+    height: 100vh!important;
+}
+/* positioning */
+.pos-rel{
+    position: relative;
+}
+.pos-abs-XY{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+/* buttons */
+.bcm-btn{
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #ffffff;
+    display: block;
+    border-radius: 5px;
+    background-color: #222;
+    border: none;
+    cursor: pointer;
+}
+.bcm-btn.red{
+    background-color: var(--bcm-accent);
+}
+.bcm-btn:hover{
+    opacity: 0.7;
+}
+/* header */
+header{
+    z-index: 10000;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    position: fixed;
+    width: 100%;
+}
+.header{
+    justify-content: space-between;
+}
+.logo{
+    background-color: #eee;
+    padding: 10px;
+}
+.logo img{
+    height: 35px;
+}
+.link{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+/* content */
+.content{
+    z-index: 0;
+    overflow: hidden;
+    padding-top: 45px;
+}
+.content .container{
+    height: calc(100vh - 45px);
+    overflow: hidden;
+    background-color: #ffffff;
+}
+.navigation{
+    padding: 30px 15px 0;
+    width: 220px;
+    height: 100%;
+    background-color: #ddd;
+    box-shadow: 5px 0 10px rgba(0,0,0,0.2);
+}
+.navigation a{
+    display: block;
+    padding-top: 10px;
+    padding-bottom: 3px;
+    font-size: 1em;
+    text-align: left;
+}
+.navigation a.active,
+.navigation a:hover{
+    margin-left: 6px;
+    color: var(--bcm-accent);
+}
+/* data section */
+.section-data{
+    padding: 30px;
+    width: calc(100% - 220px);
+    overflow-y: scroll;
+}
+input,
+textarea,
+select,
+button{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border-radius: 4px;
+    border: 1px solid #dedede;
+    padding: 7px;
+    font-size: 1.05em;
+    width: 100%;
+    resize: vertical;
+    transition: 0.3s;
+}
+input[type="number"],
+select{
+    width: 160px;
+}
+.form-item {
+    margin-top: 15px;
+    padding: 20px;
+    background-color: #eee;
+    box-shadow: 0 5px 4px -4px rgba(0,0,0,0.4);
+    border-radius: 4px;
+    position: relative;
+}
+.form-item label{
+    display: block;
+    font-size: 1.1em;
+    padding-bottom: 5px;
+}
+label.big-label{
+    font-size: 1.2em;
+    font-weight: 600;
+    padding-bottom: 15px;
+}
+label.small-label{
+    font-size: 0.9em;
+    padding-top: 5px;
+}
+.form-item .file-item{
+    overflow: hidden;
+    cursor: pointer;
+    width: 200px;
+    transition: 0.3s;
+    text-align: center;
+    cursor: pointer;
+}
+.form-item input[type='file']{
+    cursor: pointer;
+    height: 100%;
+    position:absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    -moz-opacity: 0;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+    padding: 100px;
+    width: 100%;
+}
+/* submit loading */
+.submit-container .loading-icon img {
+    height: 17px;
+    width: 17px;
+    padding: 2px;
+}
+.submit-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    width: 100%;
+    margin-top: 15px;
+}
+.submit-container *{
+    width: auto;
+}
+.submit-container .message{
+    justify-content: center;
+    padding: 11px;
+    font-size: 0.9em;
+}
+.submit-container .message .error{
+    color: var(--bcm-accent);
+}
+.submit-container .loading {
+    width: auto;
+}
+.submit-container .loading .loading-icon {
+    transform: none;
+    position: relative;
+    left: auto;
+    top: auto;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 10px;
+}
+/* loading */
+#loading{
+    z-index: 1000;
+    transition: none;
+} 
+.loading{
+    transition: 0.4s;
+    z-index: 1000;
+    background-color: #ffffff;
+    height: 100%;
+    width: 100%;
+}
+.loading-icon img {
+    display: block;
+    padding-bottom: 10px;
+    animation: Pulse;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+}
+.loading-icon img.part-2{
+    animation-delay: 200ms;
+}
+.loading-icon img.part-3{
+    animation-delay: 400ms;
+}
+@keyframes Pulse{
+    from, to{
+        opacity: 1;
+    }
+    40%{
+        opacity: 0;
+    }
+    60%{
+        opacity: 0;
+    }
+}
+/* add new field */
+.add-new-field{
+    display: block;
+    width: 30px;
+    height: 30px;
+    margin: 0 auto;
+    background-color: #aaa;
+    border-radius: 50%;
+}
+.add-new-field:hover{
+    background-color: #888;
+}
+.add-new-field .line{
+    display: block;
+    background-color: #eee;
+}
+.add-new-field .horizontal{
+    width: 20px;
+    height: 5px;
+}
+.add-new-field .vertical{
+    width: 5px;
+    height: 20px;
+}
+/* new field screen */
+.new-item-container,
+.confirmation-window{
+    background-color: rgba(0,0,0,0.6);
+}
+.new-item{
+    height: 100%;
+    width: 100%;
+}
+.new-item-form{
+    top: 55%;
+    height: 80vh;
+    width: 75vw;
+    background-color: #ccc;
+    padding: 20px;
+}
+.delete-field{
+    position: absolute;
+    right: -6px;
+    top: -10px;
+    background-color: #d90000;
+    color: #fff;
+    font-weight: 900;
+    line-height: 1;
+    padding: 3px 8px;
+    border-radius: 12px;
+}
+.confirmation-dialog{
+    height: 100%;
+    width: 100%;
+}
+.confirmation-dialog .dialog{
+    background-color: #ccc;
+    padding: 20px;
+}
+.confirmation-dialog .dialog p{
+    margin: 0;
+}
+.confirmation-dialog .dialog button{
+    margin-top: 10px;
+}
