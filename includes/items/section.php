@@ -6,25 +6,32 @@ require  __DIR__ . "/field.php";
 class Section
 {
     private $id;
-    private $name;
     private $display_name;
     private $order_on_page;
-    private $page_id;
     private $template;
 
     private $fields = array();
 
     public function __construct($section_item){
-        //set parameters to input row
-        $this->id = intval($section_item['id']);
-        $this->name = $section_item['name'];
-        $this->display_name = $section_item['display_name'];
-        $this->order_on_page = intval($section_item['order_on_page']);
-        $this->page_id = intval($section_item['page_id']);
-        $this->template = $section_item["template"];
-        
         //get db connection
         global $conn;
+
+        $sql = "SELECT order_on_page 
+                FROM `section`
+                ORDER BY order_on_page
+                DESC
+                LIMIT 1";
+        $result = $conn->query($sql);
+        $order;
+        foreach ($result as $o)
+            $order = $o["order_on_page"] + 1;
+
+        //set parameters to input row
+        $this->id = isset($section_item['id']) ? intval($section_item['id']) : null;
+        $this->display_name = $section_item['display_name'];
+        $this->order_on_page = isset($section_item['order_on_page']) ? intval($section_item['order_on_page']) : $order;
+        $this->template = $section_item["template"];
+        
         
         //query db
         $sql = "SELECT * 
@@ -50,10 +57,6 @@ class Section
         return $this->order_on_page;
     }
 
-    function get_name(){
-        return $this->name;
-    }
-
     function get_display_name(){
         return $this->display_name;
     }
@@ -61,7 +64,74 @@ class Section
     function get_template_name(){
         return $this->template;
     }
+    public static function find_section($id){
+        global $conn;
+        $id = intval($id);
+        $sql = "SELECT * 
+            FROM section 
+            WHERE id = " . $id;
+        $result = $conn->query($sql);
+        if(!$result)
+            return null;
+        
+        $section = new Section($result->fetch_assoc());
+
+        return $section;
+    }
+    public static function delete_section($id){
+        global $conn;
+        $sql = "DELETE FROM `section` WHERE `section`.`id` = ". $id .";";
+        $result = $conn->query($sql);
+
+        foreach ($this->fields as $field)
+            Field::delete_field($field->get_id());
+    }
     /* setters */
+    public function update_template_and_order($template, $order){
+        $this->template = $template;
+        $this->order_on_page = intval($order);
+    }
+    public function save(){
+        global $conn;
+        if($this->id == null):
+            $sql = "INSERT INTO `section` 
+            (`id`, 
+            `order_on_page`, 
+            `display_name`, 
+            `template`) 
+            VALUES (NULL, ?, ?, ?)";
+
+            $stmt = mysqli_prepare($conn, $sql);
+            
+            $stmt->bind_param(
+                "iss",
+                $this->order_on_page,
+                $this->display_name,
+                $this->template
+            );
+
+            $result = $stmt->execute();
+            if(!$result)
+                var_dump($conn);
+            $this->id = $result["id"];
+        else:
+            $sql = "UPDATE `section` 
+            SET 
+            `template` = ?,
+            `order_on_page` = ?
+            WHERE `section`.`id` = ".$this->id.";";
+
+            $stmt = mysqli_prepare($conn, $sql);
+            $stmt->bind_param(
+                "ss",
+                $this->template,
+                $this->order_on_page
+            );
+            $result = $stmt->execute();
+            if(!$result)
+                echo $result->error;
+        endif;
+    }
 }
 
 ?>

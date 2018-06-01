@@ -77,15 +77,20 @@
                 `order_in_section`, 
                 `label`, 
                 `id_name`) 
-                VALUES (NULL, 
-                '".$this->section_id."', 
-                '".$this->content."', 
-                '".$this->content_type."', 
-                '".$this->order_in_section."', 
-                '".$this->label."', 
-                '".$this->id_name."');";
+                VALUES (NULL, ?, ?, ?, ?, ?, ?)";
 
-                $result = $conn->query($sql);
+                $stmt = mysqli_prepare($conn, $sql);
+                
+                $stmt->bind_param(
+                    "ississ",
+                    $this->section_id,
+                    $this->content,
+                    $this->content_type,
+                    $this->order_in_section,
+                    $this->label,
+                    $this->id_name
+                );
+                $result = $stmt->execute();
                 if(!$result)
                     var_dump($conn);
                 $this->id = $result["id"];
@@ -93,10 +98,17 @@
             else:
                 $sql = "UPDATE `field` 
                 SET 
-                `content` = '".$this->content."',
-                `order_in_section` = '".$this->order_in_section."'                
+                `content` = ?,
+                `order_in_section` = ?
                 WHERE `field`.`id` = ".$this->id.";";
-                $result = $conn->query($sql);
+
+                $stmt = mysqli_prepare($conn, $sql);
+                $stmt->bind_param(
+                    "ss",
+                    $this->content,
+                    $this->order_in_section
+                );
+                $result = $stmt->execute();
                 if(!$result)
                     echo $result->error;
             endif;

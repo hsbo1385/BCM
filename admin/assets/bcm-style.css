@@ -109,6 +109,12 @@ header{
     flex-direction: column;
     justify-content: center;
 }
+.mr-15{
+    margin-right: 15px;
+}
+.ml-15{
+    margin-left: 15px;
+}
 /* content */
 .content{
     z-index: 0;
@@ -204,6 +210,15 @@ label.small-label{
     padding: 100px;
     width: 100%;
 }
+.section-update{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;  
+}
+.section-update .half{
+    width: calc(50% - 15px);
+    margin-right: 15px;
+}
 /* submit loading */
 .submit-container .loading-icon img {
     height: 17px;
@@ -211,37 +226,13 @@ label.small-label{
     padding: 2px;
 }
 .submit-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    flex-wrap: nowrap;
     width: 100%;
     margin-top: 15px;
+    text-align: right;
 }
 .submit-container *{
     width: auto;
-}
-.submit-container .message{
-    justify-content: center;
-    padding: 11px;
-    font-size: 0.9em;
-}
-.submit-container .message .error{
-    color: var(--bcm-accent);
-}
-.submit-container .loading {
-    width: auto;
-}
-.submit-container .loading .loading-icon {
-    transform: none;
-    position: relative;
-    left: auto;
-    top: auto;
-    height: 40px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 0 10px;
+    float: right;
 }
 /* loading */
 #loading{
@@ -305,6 +296,7 @@ label.small-label{
 }
 /* new field screen */
 .new-item-container,
+.new-section-container,
 .confirmation-window{
     background-color: rgba(0,0,0,0.6);
 }
@@ -343,4 +335,41 @@ label.small-label{
 }
 .confirmation-dialog .dialog button{
     margin-top: 10px;
+}
+.trumbowyg-box .trumbowyg-editor{
+    background-color: #fff;
+}
+.trumbowyg-box, .trumbowyg-editor{
+    z-index: 0;
+}
+
+/* request loading */
+#request-loading{
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 10px 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+#request-loading .message{
+    display: block;
+    width: 150px;
+    float: left;
+}
+#request-loading .message error{
+    color: var(--bcm-accent);
+}
+#request-loading .loading-icon {
+    display: flex;
+    flex-direction: row;
+    float: left;
+}
+#request-loading .loading-icon img{
+    width: 15px;
+    height: 15px;
+    margin-right: 2px;
+    padding: 0;
 }

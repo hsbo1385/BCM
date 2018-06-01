@@ -1,1 +1,3 @@
-default section 
+<?php
+    var_dump($section);
+?>

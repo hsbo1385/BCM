@@ -4,45 +4,48 @@ if(url.slice(url.length - 7, url.lenght) != "/admin/"){
     window.location.href = "/admin/";
 }
 
-var ajaxURL = '/admin/ajax.php';
+var ajaxURL = '/admin/ajax.php/';
 
 $(document).ready(function () {
     $("#loading").fadeOut();
 });
 
-//on form submit with new content
-function submitData(form){
+function submitData(e, form){
+    e.preventDefault();
     //data object to be sent
-    data = {}; 
+    var data = {};
     
-    //var which stores bool of whether a field was left blank 
-    var isBlank = false;
+    //foreach form element, populate the data object
+    $.each(form, function(i, field){
+        data[field.name] = (field.files) ? (field.files[0] === undefined) ? "" : field.files[0] : field.value;
+    });
+
+    delete data[""];
+    data.action = "upsert_data";
+
+    console.log(data);
+    sendRequest(data);
+}
+
+function submitDataSection(e, form){
+    e.preventDefault();
+    //data object to be sent
+    var data = {};
     
     //foreach form element, populate the data object
     $.each(form, function(i, field){
         data[field.name] = field.value;
-        if(field.name !='' && field.value == "")
-            isBlank = true;
     });
+
+    delete data[""];
+    data.action = "create_section";
+
     console.log(data);
-    //add action which needs to be triggered
-    data.action = "upsert_data";
-
-    //if no section has been chosen, set section to "new-item"
-    var section = (data.section_id == null) ? "new-item" : data.section_id;
-    $("#section-" + section + " .loading").removeClass("hide");
-
-    //if a field has been left blank, warn the user
-    if(isBlank){
-        $("#section-" + section + "-submit .message .other-message").fadeIn().html("Label cannot be blank.").delay(2000).fadeOut();
-    }
-    else{
-        //if all fields have been populated, send request to the backend
-        sendRequest(data, section);
-    }
+    sendRequest(data);
 }
 
 function switchSection(sectionId){
+    console.log(sectionId);
     //switching between sections
     var sectionToShow = ".section-" + sectionId;
 
@@ -77,40 +80,72 @@ function deleteField(fieldId, fieldName, section){
     });
 }
 
-function sendRequest(data, section){
+function deleteSection(e, sectionId, sectionName){
+    e.preventDefault();
+
+    $(".confirmation-window .confirmation-dialog p").html("Are you sure you would like to delete " + sectionName + "?<br>This cannot be undone.");
+    $(".confirmation-window").fadeIn();
+
+    var data = {};
+
+    data.sectionId = sectionId;
+    data.sectionName = sectionName;
+    data.action = "delete_section";
+    
+    $(".response-buttons button").click(function (e) {
+        e.preventDefault();
+
+        $(".confirmation-window").fadeOut();
+        
+        if($(this).hasClass("confirm"))
+            sendRequest(data, 1)
+    });
+}
+
+function sendRequest(formData){
+    $("#request-loading").fadeIn();
     $.ajax({
         url: ajaxURL,
         type: "POST",
         data: {
-            input: data
-        },
+            input: formData
+        },        
         success: function(returnedData){
-            $("#section-" + section + "-submit .message .confirm").fadeIn().delay(2000).fadeOut();
+            console.log(returnedData);
+            $("#request-loading .message, #request-loading .message .confirm").fadeIn();
         },
         error: function (returnedData){
-            $("#section-" + section + "-submit .message .error").fadeIn().delay(2000).fadeOut();
+            console.log(returnedData);
+            $("#request-loading .message, #request-loading .message .error").fadeIn();
         },
-        complete: function (){
-            $("#section-" + section + "-submit .loading").addClass("hide");
-            reloadForms();
-            if(section === "new-item")
-                $(".new-item-container").fadeOut();
+        complete: async function (){
+            $("#request-loading").delay(1500).fadeOut().children(".message div").fadeOut();
+            await reloadForms();
+            $(".new-item-container, .new-section-container").fadeOut();    
+            switchSection((!formData.section_id) ? firstSection : formData.section_id);
         }
     });
 }
 
-function reloadForms(){
-    $.ajax({
+async function reloadForms(){
+    await $.ajax({
         url: "assets/template/section-forms.php",
         type: "GET",
         complete: function(returnedData){
             $("#form-output").html(returnedData.responseText);
+            $('textarea').trumbowyg();
         }
     });
 }
 
 //toggle new item dialog
-function toggleNewFieldForm(){
-    $(".new-item-container input").val("");
+function toggleNewFieldForm(e){
+    e.preventDefault();
+    $(".new-item-container input[type='text']").val("");
     $(".new-item-container").fadeToggle();
+}
+function toggleNewSectionForm(e){
+    e.preventDefault();
+    $(".new-section-container input[type='text']").val("");
+    $(".new-section-container").fadeToggle();
 }
