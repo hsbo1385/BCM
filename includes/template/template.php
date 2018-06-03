@@ -1,14 +1,31 @@
 <?php   
-    require __DIR__ . "/../data.php";
-
+    
+function create_html(){
+    //get html markup
+    $html = get_template();
+    //define file
+    $file = __DIR__ . '/../../index.html';
+    //delte file if exists
+    unlink($file);
+    //create handler, open file
+    $handler = fopen($file, "w") or die('Cannot create or open HTML file');
+    //input html to file
+    file_put_contents($file, $html);
+    //close file
+    fclose($handler);
+    die();
+}
     
 function get_template(){
         
+    ob_start();
+    require_once __DIR__ . "/../data.php";
+
     $content = get_all_sections_for_page();
     ?>
     <?php 
-        foreach ($content as $section) 
-            require __DIR__ . "/sections/section-".$section->get_template_name().".php";
+        foreach ($content as $section)
+            require_once __DIR__ . "/sections/section-".$section->get_template_name().".php";
     ?>
     <!-- javascript -->
     <!-- plugins -->
@@ -25,5 +42,6 @@ function get_template(){
     </html>
 
     <?php   
+    return strval(ob_get_clean());
     }
 ?>

@@ -1,7 +1,7 @@
 <?php 
 
-require  __DIR__ . "/../web-config.php";
-require  __DIR__ . "/field.php";
+require_once  __DIR__ . "/../web-config.php";
+require_once  __DIR__ . "/field.php";
 
 class Section
 {
@@ -113,7 +113,7 @@ class Section
                 $this->order_on_page,
                 $this->display_name,
                 $this->template,
-                intval($this->in_menu)
+                $this->in_menu
             );
 
             $result = $stmt->execute();

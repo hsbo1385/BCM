@@ -1,6 +1,6 @@
 <?php 
 
-require __DIR__ . "/../web-config.php";
+require_once __DIR__ . "/../web-config.php";
 
 class ContentTypes{
     private $types = array();

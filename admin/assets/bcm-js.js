@@ -23,7 +23,6 @@ function submitData(e, form){
     delete data[""];
     data.action = "upsert_data";
 
-    console.log(data);
     sendRequest(data);
 }
 
@@ -40,12 +39,10 @@ function submitDataSection(e, form){
     delete data[""];
     data.action = "create_section";
 
-    console.log(data);
     sendRequest(data);
 }
 
 function switchSection(sectionId){
-    console.log(sectionId);
     //switching between sections
     var sectionToShow = ".section-" + sectionId;
 
@@ -121,8 +118,8 @@ function sendRequest(formData){
         complete: async function (){
             $("#request-loading").delay(1500).fadeOut().children(".message div").fadeOut();
             await reloadForms();
-            $(".new-item-container, .new-section-container").fadeOut();    
             switchSection((!formData.section_id) ? firstSection : formData.section_id);
+            $(".new-item-container, .new-section-container").fadeOut({done: reloadNewForms()}); 
         }
     });
 }
@@ -137,6 +134,26 @@ async function reloadForms(){
         }
     });
 }
+
+async function reloadNewForms(){
+    $.ajax({
+        url: "assets/template/new-section-form.php",
+        type: "GET",
+        complete: function(returnedData){
+            $(".new-section-container").html(returnedData.responseText);
+            $('textarea').trumbowyg();
+        }
+    });
+    $.ajax({
+        url: "assets/template/new-field-form.php",
+        type: "GET",
+        complete: function(returnedData){
+            $(".new-item-container").html(returnedData.responseText);
+            $('textarea').trumbowyg();
+        }
+    });
+}
+
 
 //toggle new item dialog
 function toggleNewFieldForm(e){

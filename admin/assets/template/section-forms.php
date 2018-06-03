@@ -1,5 +1,5 @@
 <?php 
-    require __DIR__ . "/../../../includes/data.php";
+    require_once __DIR__ . "/../../../includes/data.php";
 
     $sections = get_all_sections_for_page();
 ?>

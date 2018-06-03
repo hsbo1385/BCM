@@ -1,6 +1,6 @@
 <?php
-    require __DIR__ . "/items/section.php";
-    require __DIR__ . "/items/content_types.php";
+    require_once __DIR__ . "/items/section.php";
+    require_once __DIR__ . "/items/content_types.php";
 
     function get_all_sections_for_page(){
 

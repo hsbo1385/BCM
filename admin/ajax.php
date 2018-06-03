@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . "/../includes/items/section.php";
+require_once __DIR__ . "/../includes/template/template.php";
 
 $input = $_REQUEST["input"];
 
@@ -21,6 +22,8 @@ switch($input["action"]){
         header('HTTP/1.1 400 Bad Request');
         break;
 }
+
+echo create_html();
 
 function delete_field($input){
     $input = $input["fieldId"];
@@ -50,7 +53,8 @@ function upsert_data($input){
 }
 
 function create_section($section){
-    $newSection = new Section($section["section[1"]);
+    var_dump($section);
+    $newSection = new Section($section);
     $newSection->save(); 
     die();
 }

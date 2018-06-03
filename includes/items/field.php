@@ -1,7 +1,8 @@
 <?php
-    require __DIR__ . "/../web-config.php";
+    require_once __DIR__ . "/../web-config.php";
 
     class Field{
+        
         private $id;
         private $section_id;
         private $content;
@@ -10,16 +11,29 @@
         private $label;
         private $id_name;
 
-        static $order_generator = 0;
-
         public function __construct($field_item){
+            
             $this->id = isset($field_item['id']) ? intval($field_item['id']) : null;
             $this->section_id = intval($field_item['section_id']);
             $this->content = isset($field_item['content']) ? $field_item['content'] : null;
             $this->content_type = $field_item['content_type'];
-            $this->order_in_section = isset($field_item['order_in_section']) ? intval($field_item['order_in_section']) : 1;
             $this->label = $field_item['label'];
             $this->id_name = isset($field_item["id_name"]) ? $field_item["id_name"] : strval(implode("_", explode(" ", strtolower($this->label))));
+            
+            global $conn;
+            
+            $sql = "SELECT order_in_section 
+                FROM `field`
+                WHERE `section_id` = ". $this->section_id ."
+                ORDER BY order_in_section
+                ASC
+                LIMIT 1";
+            $result = $conn->query($sql);
+            $order;
+            foreach ($result as $o)
+                $order = $o["order_in_section"] + 1;
+            
+            $this->order_in_section = isset($field_item['order_in_section']) ? intval($field_item['order_in_section']) : $order;
         }
         /* getters */
         public function get_id(){
