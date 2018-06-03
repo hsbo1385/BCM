@@ -9,7 +9,7 @@ class Section
     private $display_name;
     private $order_on_page;
     private $template;
-
+    private $in_menu;
     private $fields = array();
 
     public function __construct($section_item){
@@ -31,8 +31,7 @@ class Section
         $this->display_name = $section_item['display_name'];
         $this->order_on_page = isset($section_item['order_on_page']) ? intval($section_item['order_on_page']) : $order;
         $this->template = $section_item["template"];
-        
-        
+        $this->in_menu = boolval($section_item["in_menu"]);
         //query db
         $sql = "SELECT * 
                 FROM field 
@@ -64,6 +63,9 @@ class Section
     function get_template_name(){
         return $this->template;
     }
+    function is_in_menu(){
+        return (intval($this->in_menu) === 1);
+    }
     public static function find_section($id){
         global $conn;
         $id = intval($id);
@@ -87,9 +89,10 @@ class Section
             Field::delete_field($field->get_id());
     }
     /* setters */
-    public function update_template_and_order($template, $order){
+    public function update_section($template, $order, $menu){
         $this->template = $template;
         $this->order_on_page = intval($order);
+        $this->in_menu = $menu;
     }
     public function save(){
         global $conn;
@@ -98,16 +101,19 @@ class Section
             (`id`, 
             `order_on_page`, 
             `display_name`, 
-            `template`) 
-            VALUES (NULL, ?, ?, ?)";
+            `template`,
+            `in_menu`
+            ) 
+            VALUES (NULL, ?, ?, ?, ?)";
 
             $stmt = mysqli_prepare($conn, $sql);
             
             $stmt->bind_param(
-                "iss",
+                "issi",
                 $this->order_on_page,
                 $this->display_name,
-                $this->template
+                $this->template,
+                intval($this->in_menu)
             );
 
             $result = $stmt->execute();
@@ -118,14 +124,16 @@ class Section
             $sql = "UPDATE `section` 
             SET 
             `template` = ?,
-            `order_on_page` = ?
+            `order_on_page` = ?,
+            `in_menu` = ?
             WHERE `section`.`id` = ".$this->id.";";
 
             $stmt = mysqli_prepare($conn, $sql);
             $stmt->bind_param(
-                "ss",
+                "ssi",
                 $this->template,
-                $this->order_on_page
+                $this->order_on_page,
+                $this->in_menu
             );
             $result = $stmt->execute();
             if(!$result)

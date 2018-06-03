@@ -118,8 +118,8 @@
                         New Section
                     </h3>
                     <div class="form-item">
-                        <label for="section[1][display_name]">Section Name</label>
-                        <input type="text" name="section[1][display_name]">
+                        <label for="display_name">Section Name</label>
+                        <input type="text" name="display_name">
                     </div>
                     <?php 
                         $templates = scandir(__DIR__.'/../includes/template/sections');
@@ -127,10 +127,10 @@
                         $templates = array_slice($templates, 2);
                         ?>
                     <div class="form-item">
-                        <label class="big-label" for="section1[1][template]">
+                        <label class="big-label" for="template">
                             Section Template
                         </label>
-                        <select name="section[1][template]">
+                        <select name="template">
                         <?php
                         //show all templates in dropdown menu from template/sections directory
                         foreach($templates as $file):

@@ -29,12 +29,11 @@ function delete_field($input){
 
 function upsert_data($input){
     $fields = $input;
-        
-    $newSection = Section::find_section($input["section_id"]);
-    $newSection->update_template_and_order($input["section_template"], $input['section_order']);
-    $newSection->save();
 
-    unset($fields['section_id'], $fields["section_template"], $fields["action"]);   
+    $newSection = Section::find_section($input["section_id"]);
+    $newSection->update_section($input["section_template"], $input['section_order'], $input['section_menu_status']);
+    $newSection->save();
+    unset($fields['section_id'], $fields["section_template"], $fields['section_order'], $fields["action"], $fields['section_menu_status']);   
 
     foreach($fields as $field):
         $newField;

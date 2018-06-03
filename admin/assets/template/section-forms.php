@@ -85,7 +85,7 @@
             $templates = array_slice($templates, 2);
             ?>
             <div class="form-item section-update">
-                <div class="half">
+                <div class="third">
                     <label class="big-label" for="template">
                         Section Template
                     </label>
@@ -104,11 +104,23 @@
                         ?>
                     </select>
                 </div>
-                <div class="half">
+                <div class="third">
                     <label class="big-label" for="section_order">
                         Page Order
                     </label>
                     <input type="number" name="section_order" value="<?=$section->get_order()?>">
+                </div>
+                <div class="third">
+                    <label class="big-label" for="section_menu_status">
+                        In Menu
+                    </label>
+                        <?php
+                        $isInMenu = (intval($section->is_in_menu()) === 0);
+                        ?>
+                    <select name="section_menu_status">
+                        <option value="1" <?=(intval($section->is_in_menu()) == 1) ? "selected='selected'" : ""?>>Yes</option>
+                        <option value="0" <?=(intval($section->is_in_menu()) == 0) ? "selected='selected'" : ""?>>No</option>
+                    </select>
                 </div>
             </div>
             <div class="form-item">
