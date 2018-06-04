@@ -1,0 +1,74 @@
+/* common */
+a{
+    cursor: pointer;
+    transition: 0.2s;
+}
+/* menu */
+nav.menu{
+    width: 100%;
+    padding: 20px 0;
+}
+nav.menu a{
+    padding: 0 10px;
+}
+nav.menu a:hover{
+    color: #000!important;
+}
+nav.menu a:last-child{
+    padding-right: 0;
+}
+/* landing section */
+.landing{
+    height: 100vh;
+    background: linear-gradient(30deg, rgba(150, 131, 131, 0.788), rgba(194, 0, 0, 0.788));
+    color: #fff;
+    text-align: right;
+}
+.landing h1{
+    font-weight: 700;
+}
+.landing-content{
+    padding-top: 30vh;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    text-shadow: 0 0 19px rgba(0, 0, 0, 0.3);
+}
+/* about */
+.about {
+    min-height: 50vh;
+    padding: 50px 0;
+    background-image: url(../img/img-placeholder-large.png);
+    background-color: #fff;
+    background-position: 88% 50%;
+    background-size: auto 110%;
+    background-repeat: no-repeat;
+    color: #444;
+}
+.about h2{
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+/* services */
+.services{
+    min-height: 50vh;
+    padding: 50px 0;
+    background-color: #444;
+    color: #fff;
+}
+.services h2{
+    width: 100%;
+    text-align: center;
+    font-weight: 700;
+}
+.single-service{
+    color: #444;
+    background-color: #aaa;
+    text-align: center;
+    font-size: 1.3em;
+    padding: 35px 25px;
+    margin: 15px 0;
+    transition: 0.4s;
+}
+.single-service:hover{
+    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.4);
+    background-color: #ddd;
+}

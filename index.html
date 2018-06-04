@@ -22,46 +22,72 @@
     
     <title>BCM Demo Page</title>
 </head>
-<body><pre class='xdebug-var-dump' dir='ltr'>
-<small>C:\wamp64\www\BCM-capstone\includes\template\sections\section-landing.php:2:</small>
-<b>object</b>(<i>Section</i>)[<i>6</i>]
-  <i>private</i> 'id' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font>
-  <i>private</i> 'display_name' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'Landing Section'</font> <i>(length=15)</i>
-  <i>private</i> 'order_on_page' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>2</font>
-  <i>private</i> 'template' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'landing'</font> <i>(length=7)</i>
-  <i>private</i> 'in_menu' <font color='#888a85'>=&gt;</font> <small>boolean</small> <font color='#75507b'>false</font>
-  <i>private</i> 'fields' <font color='#888a85'>=&gt;</font> 
-    <b>array</b> <i>(size=0)</i>
-      <i><font color='#888a85'>empty</font></i>
-</pre><pre class='xdebug-var-dump' dir='ltr'>
-<small>C:\wamp64\www\BCM-capstone\includes\template\sections\section-about.php:2:</small>
-<b>object</b>(<i>Section</i>)[<i>10</i>]
-  <i>private</i> 'id' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>20</font>
-  <i>private</i> 'display_name' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'About Section'</font> <i>(length=13)</i>
-  <i>private</i> 'order_on_page' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>3</font>
-  <i>private</i> 'template' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'about'</font> <i>(length=5)</i>
-  <i>private</i> 'in_menu' <font color='#888a85'>=&gt;</font> <small>boolean</small> <font color='#75507b'>true</font>
-  <i>private</i> 'fields' <font color='#888a85'>=&gt;</font> 
-    <b>array</b> <i>(size=2)</i>
-      0 <font color='#888a85'>=&gt;</font> 
-        <b>object</b>(<i>Field</i>)[<i>12</i>]
-          <i>private</i> 'id' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>71</font>
-          <i>private</i> 'section_id' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>20</font>
-          <i>private</i> 'content' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'About Our Company'</font> <i>(length=17)</i>
-          <i>private</i> 'content_type' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'Text'</font> <i>(length=4)</i>
-          <i>private</i> 'order_in_section' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>1</font>
-          <i>private</i> 'label' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'Title'</font> <i>(length=5)</i>
-          <i>private</i> 'id_name' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'title'</font> <i>(length=5)</i>
-      1 <font color='#888a85'>=&gt;</font> 
-        <b>object</b>(<i>Field</i>)[<i>13</i>]
-          <i>private</i> 'id' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>72</font>
-          <i>private</i> 'section_id' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>20</font>
-          <i>private</i> 'content' <font color='#888a85'>=&gt;</font> <font color='#3465a4'>null</font>
-          <i>private</i> 'content_type' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'Text'</font> <i>(length=4)</i>
-          <i>private</i> 'order_in_section' <font color='#888a85'>=&gt;</font> <small>int</small> <font color='#4e9a06'>2</font>
-          <i>private</i> 'label' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'new field for about'</font> <i>(length=19)</i>
-          <i>private</i> 'id_name' <font color='#888a85'>=&gt;</font> <small>string</small> <font color='#cc0000'>'new_field_for_about'</font> <i>(length=19)</i>
-</pre>    <!-- javascript -->
+<body><div id="section-1" class="landing">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="menu">
+                                                <a onclick="scrollToSection(1)">Landing</a>
+                                                    <a onclick="scrollToSection(20)">About</a>
+                                                    <a onclick="scrollToSection(21)">Services</a>
+                                        </nav>
+            </div>
+            <div class="offset-md-5 col-md-7 col-12">
+                <div class="landing-content">
+                    <h1>
+                        This is our company.                    </h1>
+                    <p>
+                        <p>We do many things, such as this or that, and even <strong>the thing</strong> you really need right now.</p>                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><div id="section-20" class="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <h2>
+                    About Our Company.                </h2>
+                <p>
+                    <p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><div></div><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p style="color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: Consolas, " courier="" new",="" monospace;="" font-size:="" 14px;="" line-height:="" 19px;="" white-space:="" pre;"=""></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><div></div><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p style="line-height: 19px;"></p><p style="line-height: 19px;"></p><p style="line-height: 19px;"></p><p style="line-height: 19px;"></p><p style="line-height: 19px;"></p><p style="line-height: 19px;"></p><p style="line-height: 19px;"></p><p style="line-height: 19px;"></p><div style="line-height: 19px;"></div><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p></p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut nesciunt natus facere id quod itaque voluptate harum earum, laboriosam iste rerum quidem dolorem quia distinctio autem velit maiores officia. Facilis rerum aspernatur, nam nemo deleniti soluta? Eveniet at tempore libero, magni minus, <strong>placeat eius ex obcaecati </strong>quam, natus ullam maxime quis quos animi blanditiis unde quae neque.&nbsp;</p><p>In culpa provident amet totam impedit! Nostrum, eligendi. Dignissimos nemo eius praesentium excepturi odit nihil facilis accusantium natus. Assumenda dolore eius commodi officia sequi nihil quaerat molestiae, doloribus eligendi unde? Fuga deserunt <strong>assumenda eveniet porro ut illo perferendis </strong>delectus distinctio illum neque, exercitationem asperiores optio dolores corporis a libero.<br></p>                </p>
+            </div>
+        </div>
+    </div>
+</div><div id="section-21" class="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>What we offer.</h2>
+                <p>
+                    <p></p><div></div><p></p><p></p><div></div><p></p><p style="line-height: 19px;"></p><div style="line-height: 19px;"></div><p></p><p style="text-align: center; "><span>Lorem ipsum, dolor sit amet consectetur adipisicing elit</span><span>.</span><span> Natus voluptatem autem tenetur qui maiores repudiandae dolorem nemo velit, expedita voluptatum possimus laudantium sed similique culpa incidunt fuga esse repellat ipsam facilis cupiditate totam odit sit nostrum unde?&nbsp;</span></p>                </p>
+            </div>
+                                <div class="col-md-4 col-6">
+                        <div class="single-service">
+                            Service 1                        </div>
+                    </div>
+                                    <div class="col-md-4 col-6">
+                        <div class="single-service">
+                            Service 2                        </div>
+                    </div>
+                                    <div class="col-md-4 col-6">
+                        <div class="single-service">
+                            Service 3                        </div>
+                    </div>
+                                    <div class="col-md-4 col-6">
+                        <div class="single-service">
+                            Service 4                        </div>
+                    </div>
+                                    <div class="col-md-4 col-6">
+                        <div class="single-service">
+                            Service 5                        </div>
+                    </div>
+                                    <div class="col-md-4 col-6">
+                        <div class="single-service">
+                            Service 6                        </div>
+                    </div>
+                        </div>
+    </div>
+</div>    <!-- javascript -->
     <!-- plugins -->
     <script src="assets/js/plugins/popper.min.js"></script>
     <script src="assets/js/plugins/bootstrap/bootstrap.min.js"></script>

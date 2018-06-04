@@ -1,7 +1,3 @@
-<?php 
-    $c = 0;
-    $fields = $section->get_fields();
-?>
 <!DOCTYPE html>
 <html lang="en">
     <head>

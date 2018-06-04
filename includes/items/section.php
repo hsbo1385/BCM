@@ -64,7 +64,7 @@ class Section
         return $this->template;
     }
     function is_in_menu(){
-        return (intval($this->in_menu) === 1);
+        return $this->in_menu;
     }
     public static function find_section($id){
         global $conn;

@@ -29,10 +29,9 @@
                 ASC
                 LIMIT 1";
             $result = $conn->query($sql);
-            $order;
+            $order = 0;
             foreach ($result as $o)
-                $order = $o["order_in_section"] + 1;
-            
+                $order = intval($o["order_in_section"]) + 1;
             $this->order_in_section = isset($field_item['order_in_section']) ? intval($field_item['order_in_section']) : $order;
         }
         /* getters */

@@ -24,8 +24,11 @@ function get_template(){
     $content = get_all_sections_for_page();
     ?>
     <?php 
-        foreach ($content as $section)
+        foreach ($content as $section){
+            $c = 0;
+            $fields = $section->get_fields();
             require_once __DIR__ . "/sections/section-".$section->get_template_name().".php";
+        }
     ?>
     <!-- javascript -->
     <!-- plugins -->
