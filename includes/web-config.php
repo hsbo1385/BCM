@@ -1,8 +1,8 @@
 <?php
 
 $servername = "localhost";
-$username = "bcmTest";
-$password = "8k1w9I_e";
+$username = "root";
+$password = "";
 $dbname = "bcm";
 
 try {
