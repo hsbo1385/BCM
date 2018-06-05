@@ -72,3 +72,11 @@ nav.menu a:last-child{
     box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.4);
     background-color: #ddd;
 }
+/* copyrights */
+.copyrights{
+    background-color: #cf3838;
+    color: #fff;
+    text-align: center;
+    padding: 2px 0;
+    font-size: 10px;
+}
