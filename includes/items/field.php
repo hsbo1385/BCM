@@ -26,7 +26,7 @@
                 FROM `field`
                 WHERE `section_id` = ". $this->section_id ."
                 ORDER BY order_in_section
-                ASC
+                DESC
                 LIMIT 1";
             $result = $conn->query($sql);
             $order = 0;
