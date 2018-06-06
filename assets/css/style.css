@@ -13,6 +13,8 @@ nav.menu{
     left: 0;
     right: 0;
     transition: 0.3s;
+    color: #fff;
+    z-index: 100;
 }
 nav.menu a{
     padding: 0 10px;
